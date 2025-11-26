@@ -2,3 +2,6 @@ venv/
 /venv/
 node_modules/
 /node_modules
+info.txt
+_pycache_/
+/_pycache_
