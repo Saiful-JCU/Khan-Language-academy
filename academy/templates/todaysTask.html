@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gray-100 flex">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white shadow-lg p-6 hidden md:block">
+        <h1 class="text-2xl font-bold mb-8">📘 Study Dashboard</h1>
+
+        <nav class="space-y-4">
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="/">Dashboard</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="#Vocabulary">Vocabulary</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="#grammer">Grammar</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="#reading">Reading</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="#speaking">Speaking</a>
+        </nav>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-6 space-y-10">
+
+        <!-- HEADER -->
+        <header>
+            <h2 class="text-3xl font-bold">👋 Welcome Back</h2>
+            <p class="text-gray-600">Let’s continue improving your Chinese today.</p>
+        </header>
+
+        <div>
+            <h3 class="text-center text-lg text-rose-500 underline">{{ vocab.day }}</h3>
+        </div>
+
+        <!-- VOCAB CARDS -->
+        <section id="Vocabulary">
+            <h3 class="text-2xl font-bold mb-4">📝 New Vocabulary</h3>
+
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <!-- CARD -->
+                {% for v in vocab %}
+                    <div class="bg-white p-5 rounded-xl shadow hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="text-blue-600 text-2xl">📌</div>
+                            <h4 class="text-xl font-semibold">{{ v.chinese}}</h4>
+                        </div>
+                        <p class="text-gray-600">{{ c.pinyin }}</p>
+                        <p class="font-medium text-gray-800 mt-1">→ {{ v.english }}</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+
+
+        <!-- GRAMMAR CARD -->
+        <section id="grammer" class="bg-white p-6 rounded-xl shadow">
+            <h3 class="text-2xl font-bold mb-3">📘 Grammar Focus: <span class="text-blue-600">了</span></h3>
+            <p class="text-gray-700 mb-5">Used for completed actions or state changes.</p>
+
+            <!-- COLLAPSIBLE -->
+            <details class="bg-blue-50 p-4 rounded-lg cursor-pointer">
+                <summary class="font-semibold text-blue-700 text-lg">📖 Rules of Using 了</summary>
+
+                <div class="mt-4 overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-blue-200">
+                                <th class="p-3 text-left">Rule</th>
+                                <th class="p-3">Situation</th>
+                                <th class="p-3">Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for g in grammar %}
+                                <tr class="border-b">
+                                    {% if g.rule_1 %} 
+                                        <td class="p-3">{{ g.rule_1 }}</td>
+                                    {% endif %}
+                                    {% if g.rule_2 %} 
+                                        <td class="p-3">{{ g.rule_2 }}</td>
+                                    {% endif %}
+                                    {% if g.rule_3 %} 
+                                        <td class="p-3">{{ g.rule_3 }}</td>
+                                    {% endif %}
+                                    {% if g.rule_4 %} 
+                                        <td class="p-3">{{ g.rule_4 }}</td>
+                                    {% endif %}
+
+                                    {% if g.situation_1 %}
+                                        <td class="p-3">{{ g.situation_1 }}</td>
+                                    {% endif %}
+                                    {% if g.situation_2 %}
+                                        <td class="p-3">{{ g.situation_2 }}</td>
+                                    {% endif %}
+                                    {% if g.situation_3 %}
+                                        <td class="p-3">{{ g.situation_3 }}</td>
+                                    {% endif %}
+                                    {% if g.situation_4 %}
+                                        <td class="p-3">{{ g.situation_4 }}</td>
+                                    {% endif %}
+
+                                    {% if g.example_1 %}
+                                        <td class="p-3">{{ g.example_1 }}</td>
+                                    {% endif %}
+                                    {% if g.example_2 %}
+                                        <td class="p-3">{{ g.example_2 }}</td>
+                                    {% endif %}
+                                    {% if g.example_3 %}
+                                        <td class="p-3">{{ g.example_3 }}</td>
+                                    {% endif %}
+                                    {% if g.example_4 %}
+                                        <td class="p-3">{{ g.example_4 }}</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+        </section>
+
+
+
+        <!-- SENTENCE TABLE IN CARDS -->
+        <section>
+            <h3 class="text-2xl font-bold mb-3">📝 Sentences Using Today’s Words</h3>
+
+            <div class="grid gap-4 md:grid-cols-2">
+                {% for s in sentence %}
+                    <div class="bg-white p-5 rounded-xl shadow">
+                        <h4 class="font-bold mb-2">{{ s.word }}</h4>
+                        <p class="text-gray-700">{{ s.sentence }}</p>
+                        <p class="text-gray-500 text-sm italic">{{ s.pinyin}}</p>
+                        <p class="font-medium mt-2">→ {{ s.meaning }}</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+
+
+        <!-- READING PRACTICE -->
+        <section id="reading" class="bg-white p-6 rounded-xl shadow">
+            <h3 class="text-2xl font-bold mb-3">📖 Reading Practice</h3>
+            <p class="text-gray-700 mb-4">Highlight unknown words and add them to your vocab list.</p>
+
+            <details class="bg-yellow-50 p-4 rounded-lg">
+                <summary class="font-semibold text-yellow-700 text-lg">📄 Show Reading Passage</summary>
+
+                <div class="mt-4">
+                    {% for r in reading %}
+                        <p class="leading-7">
+                            {{ r.content }}
+                        </p>
+                        {% endfor %}
+                </div>
+            </details>
+        </section>
+
+
+
+        <!-- SPEAKING PRACTICE -->
+        <section id="speaking" class="bg-white p-6 rounded-xl shadow">
+            <h3 class="text-2xl font-bold mb-3">🎤 Speaking Practice</h3>
+            <p class="text-gray-700 mb-4">Record a short video explaining what you learned today.</p>
+
+            <div class="flex flex-col gap-4 max-w-sm">
+                <input 
+                    type="file"
+                    accept="video/*"
+                    class="border p-3 rounded-lg"
+                >
+                <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    Submit
+                </button>
+            </div>
+        </section>
+
+
+
+        <!-- OPTIONAL EXERCISES -->
+        <section class="bg-white p-6 rounded-xl shadow">
+            <h3 class="text-2xl font-bold">🧩 Optional Exercise</h3>
+            <p class="text-gray-700 mt-2">Coming soon...</p>
+        </section>
+
+    </main>
+</div>
+
+
+{% endblock content %}
