@@ -1,13 +1,17 @@
 from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone 
+from ckeditor.fields import RichTextField
+
+
+
+
 
 # Create your models here.
 
 
 class DayStrick(models.Model):
     day = models.CharField(max_length=15, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True) 
+    created_at = models.DateTimeField(auto_now_add=False) 
     updated_at = models.DateTimeField(auto_now=True)
     author = models.CharField(max_length=50, null=True, blank=True)
 
@@ -56,7 +60,7 @@ class PracticeSentences(models.Model):
     
 class ReadingPractice(models.Model):
     day = models.ForeignKey(DayStrick, on_delete = models.CASCADE)
-    content = RichTextUploadingField()
+    content = RichTextField()
 
     def __str__(self):
         return f"Reading for {self.day}"
