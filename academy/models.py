@@ -11,7 +11,7 @@ from ckeditor.fields import RichTextField
 
 class DayStrick(models.Model):
     day = models.CharField(max_length=15, unique=True)
-    created_at = models.DateTimeField(auto_now_add=False) 
+    created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)
     author = models.CharField(max_length=50, null=True, blank=True)
 

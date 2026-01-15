@@ -78,7 +78,7 @@ def add_all_data(request):
                 day=day_obj,
                 file=request.FILES.get("speaking_file")
             )
-        print(day_name, grammar_point, sentence, content)
+        print(day_name, grammar_point, content)
         return redirect("success_page")
     print("unsuccess")
 
