@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from academy import url
+from user import urls
 from django.conf import settings 
 from django.conf.urls.static import static
 
@@ -24,6 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include('academy.url')),
+    path('user/', include('user.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
