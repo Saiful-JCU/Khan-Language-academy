@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DayStrick, Vocabulary, Grammar, GrammarRule, PracticeSentences, SpeakingPractice, ReadingPractice
+from .models import Notes, DayStrick, Vocabulary, Grammar, GrammarRule, PracticeSentences, SpeakingPractice, ReadingPractice
 
 # Register your models here.
 
@@ -33,6 +33,6 @@ class SpeakingPracticeAdmin(admin.ModelAdmin):
     list_display = ['day', 'file']
     
 
-# @admin.register(Post)
-# class PostAdmin(admin.ModelAdmin):
-#     list_display = ('title', 'date_created')
+@admin.register(Notes)
+class NotesAdmin(admin.ModelAdmin):
+    list_display = ('title', 'content')

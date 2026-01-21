@@ -15,7 +15,6 @@ class DayStrick(models.Model):
     def __str__(self):
         return f"Day - {self.id}"
 
-
 class Grammar(models.Model):
     day = models.ForeignKey(DayStrick, on_delete=models.CASCADE)
     grammar_point = models.CharField(max_length=50, unique=True)
@@ -37,8 +36,6 @@ class GrammarRule(models.Model):
     rule = models.CharField(max_length=200, blank=True, null=True)
     situation = models.CharField(max_length=500, blank=True, null=True)
     example = models.CharField(max_length=500, blank=True, null=True)
-
-
 
 class Vocabulary(models.Model):
     day = models.ForeignKey(DayStrick, on_delete=models.CASCADE, blank=True, null=True)
@@ -103,3 +100,6 @@ class SpeakingPractice(models.Model):
     def __str__(self):
         return f"Speaking for {self.day}"
 
+class Notes(models.Model):
+    title = models.CharField(max_length = 300)
+    content = RichTextField()

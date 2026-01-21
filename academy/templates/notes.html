@@ -24,23 +24,23 @@
 
         <!-- HEADER -->
         <header>
-            <h2 class="text-3xl font-bold">👋 Welcome Back</h2>
-            <p class="text-gray-600">Let’s continue revise all the Content what you Read For Practicing.</p>
+            <h2 class="text-3xl font-bold">👋Hey,  Welcome Back</h2>
+            <p class="text-gray-600">Let’s check the Notes if any special play for today.</p>
         </header>
 
 
                 <!-- READING PRACTICE -->
                 <section id="reading" class="bg-white p-6 rounded-xl shadow">
-                    <h3 class="text-2xl font-bold mb-3">📖 Reading Practice</h3>
-                    <p class="text-gray-700 mb-4">📄 All {{ cnt }} Passages You Practice for Reading </p>
+                    <h3 class="text-2xl font-bold mb-3">📖 Checking and Create Note every day is a good Practice</h3>
+                    <p class="text-gray-700 mb-4">📄 All {{ cnt }} Notes </p>
         
-                    {% for r in content %}
+                    {% for n in notes %}
                     <details class="bg-yellow-50 p-4 rounded-lg mb-4">
-                        <summary class="font-semibold text-yellow-700 text-lg">{{ r.day }}</summary>
+                        <summary class="font-semibold text-yellow-700 text-lg">{{ n.title }}</summary>
                             <div class="mt-4">
                                 
                                     <p class="leading-7">
-                                        {{ r.content|safe }}
+                                        {{ n.content|safe }}
                                     </p>
                                     
                             </div>

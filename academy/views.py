@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import timedelta
 from datetime import date
-from .models import Vocabulary, Grammar, GrammarRule, PracticeSentences, ReadingPractice, SpeakingPractice, DayStrick
+from .models import Notes, Vocabulary, Grammar, GrammarRule, PracticeSentences, ReadingPractice, SpeakingPractice, DayStrick
 
 today = date.today()
 yesterday = today - timedelta(days = 1)
@@ -209,7 +209,6 @@ def fourDayBeforeTask(request):
     )
     return render(request, 'fourDayBeforeTask.html', {'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
 
-
 def sevenDayBeforeTask(request):
 
     sevenDay = today - timedelta(days=6)
@@ -239,9 +238,6 @@ def sevenDayBeforeTask(request):
         day__created_at = sevenDay
     )
     return render(request, 'sevenDayBeforeTask.html', {'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
-
-
-
 
 def add_all_data(request):
     print("inside all_data pull fun")
@@ -310,11 +306,13 @@ def add_all_data(request):
 
     return render(request, "create-task.html")
 
-
 def success(request):
     return render(request, "success.html")
 
-
+def notes(request):
+    note = Notes.objects.all()
+    cnt = Notes.objects.all().count()
+    return render(request, 'notes.html', {'notes':note, 'cnt':cnt})
 
 
 

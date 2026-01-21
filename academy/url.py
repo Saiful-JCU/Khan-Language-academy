@@ -1,5 +1,5 @@
 from django.urls import path 
-from academy.views import home, allVocabularyView, allGrammarView, sentencesView, readingView, speakingContentView, todaysTask, yesterdayTask, fourDayBeforeTask, sevenDayBeforeTask, add_all_data, success 
+from academy.views import home, notes, allVocabularyView, allGrammarView, sentencesView, readingView, speakingContentView, todaysTask, yesterdayTask, fourDayBeforeTask, sevenDayBeforeTask, add_all_data, success 
 
 urlpatterns = [
     path("", home ),
@@ -12,6 +12,7 @@ urlpatterns = [
     path("readingView/", readingView , name="readingView"),
     path("speakingContentView/", speakingContentView , name="speakingContentView"),
     path("sentencesView/", sentencesView , name="sentencesView"),
+    path("notes/", notes , name="notes"),
     # path('createTask/', createTask, name='createTask'), 
     path("add-all/", add_all_data, name="add_all"),
     path("success/", success, name="success_page")
