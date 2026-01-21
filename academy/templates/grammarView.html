@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gray-100 flex">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white shadow-lg p-6 hidden md:block">
+        <h1 class="text-2xl font-bold mb-8">📘 Study Dashboard</h1>
+
+        <nav class="space-y-4">
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="/">Dashboard</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'allVocabularyView' %}">Vocabulary</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'allGrammarView' %}">Grammar</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'sentencesView' %}">Sentences</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'readingView' %}">Reading</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'speakingContentView' %}">Speaking</a>
+        </nav>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-6 space-y-10">
+
+        <!-- HEADER -->
+        <header>
+            <h2 class="text-3xl font-bold">👋 Welcome Back</h2>
+            <p class="text-gray-600">Let’s continue revise all the Grammar Point what you learn.</p>
+        </header>
+
+
+
+
+        <!-- GRAMMAR CARD -->
+        <section id="grammer" class="bg-white p-6 rounded-xl shadow">
+            <h3 class="text-2xl font-bold mb-3">📘Total Grammar Points:  {{ total_grammar }}<span class="text-blue-600"></span></h3>
+            <p class="text-gray-700 mb-5">Used for completed actions or state changes.</p>
+
+            <!-- COLLAPSIBLE -->
+            {% for gra in grammar %}
+                <details class="bg-blue-50 p-4 mb-4 rounded-lg cursor-pointer">
+                    <summary class="font-semibold text-blue-700 text-lg">📖 Rules of Using {{ gra.grammar_point }}</summary>
+
+                    <div class="mt-4 overflow-x-auto">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr class="bg-blue-200">
+                                    <th class="p-3 text-left">Rule</th>
+                                    <th class="p-3">Situation</th>
+                                    <th class="p-3">Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for g in gra.rules.all %}
+                                    <tr class="border-b">
+                                        {% comment %} rules {% endcomment %}
+                                        {% if g.rule %} 
+                                            <td class="p-3">{{ g.rule }}</td>
+                                        {% endif %}
+
+                                        {% comment %} situation {% endcomment %}
+                                        {% if g.situation %}
+                                            <td class="p-3">{{ g.situation }}</td>
+                                        {% endif %}
+
+                                        {% comment %} example {% endcomment %}
+                                        {% if g.example %}
+                                            <td class="p-3">{{ g.example }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                {% endfor %}
+
+        </section>
+
+    </main>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add All Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-10">
+
+<div class="max-w-5xl mx-auto bg-white p-10 rounded-xl shadow-lg space-y-10">
+
+    <h1 class="text-3xl font-bold text-center">Add All Daily Chinese Content</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-10">
+        {% csrf_token %}
+
+        <!-- DAY -->
+        <div>
+            <h2 class="text-xl font-bold mb-4">Day Information</h2>
+            <input name="day" required  placeholder="Day (e.g. Day 1)" class="w-full p-2 border rounded mb-3">
+            <input name="author" placeholder="Author Name" class="w-full p-2 border rounded">
+        </div>
+
+        <!-- GRAMMAR -->
+        <div>
+            <h2 class="text-xl font-bold mb-4">Grammar</h2>
+            <input name="grammar_point" required placeholder="Grammar Point" class="w-full p-2 border rounded mb-2">
+            <textarea name="grammar_summary" placeholder="Grammar Summary" class="w-full p-2 border rounded mb-3"></textarea>
+
+            <div class="grid grid-cols-2 gap-4">
+                <input name="rule_1" placeholder="Rule 1" class="p-2 border rounded">
+                <input name="rule_2" placeholder="Rule 2" class="p-2 border rounded">
+                <input name="rule_3" placeholder="Rule 3" class="p-2 border rounded">
+                <input name="rule_4" placeholder="Rule 4" class="p-2 border rounded">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-4">
+                <input name="situation_1" placeholder="Situation 1" class="p-2 border rounded">
+                <input name="situation_2" placeholder="Situation 2" class="p-2 border rounded">
+                <input name="situation_3" placeholder="Situation 3" class="p-2 border rounded">
+                <input name="situation_4" placeholder="Situation 4" class="p-2 border rounded">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-4">
+                <input name="example_1" placeholder="Example 1" class="p-2 border rounded">
+                <input name="example_2" placeholder="Example 2" class="p-2 border rounded">
+                <input name="example_3" placeholder="Example 3" class="p-2 border rounded">
+                <input name="example_4" placeholder="Example 4" class="p-2 border rounded">
+            </div>
+        </div>
+
+        <!-- VOCABULARY -->
+        <div>
+            <h2 class="text-xl font-bold mb-4">Vocabulary</h2>
+            <input name="chinese" placeholder="Chinese Word" class="w-full p-2 border rounded mb-2">
+            <input name="pinyin" placeholder="Pinyin" class="w-full p-2 border rounded mb-2">
+            <input name="english" placeholder="English Meaning" class="w-full p-2 border rounded mb-2">
+            <input name="vocab_example" placeholder="Example Sentence" class="w-full p-2 border rounded">
+        </div>
+
+        <!-- PRACTICE SENTENCE -->
+        <div>
+            <h2 class="text-xl font-bold mb-4">Practice Sentence</h2>
+            <input name="sentence" placeholder="Sentence" class="w-full p-2 border rounded mb-2">
+            <input name="sentence_pinyin" placeholder="Sentence Pinyin" class="w-full p-2 border rounded mb-2">
+            <input name="sentence_meaning" placeholder="Meaning" class="w-full p-2 border rounded">
+        </div>
+
+        <!-- READING -->
+        <div>
+            <h2 class="text-xl font-bold mb-4">Reading Practice</h2>
+            <textarea name="reading_content" placeholder="Reading Content" class="w-full p-2 border rounded"></textarea>
+        </div>
+
+        <!-- SPEAKING -->
+        <div>
+            <h2 class="text-xl font-bold mb-4">Speaking Practice</h2>
+            <input type="file" name="speaking_file" class="w-full p-2 border rounded bg-gray-50">
+        </div>
+
+        <button type="submit" class="bg-blue-600 text-white w-full p-3 rounded-lg text-lg hover:bg-blue-700">
+            Save All Data
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

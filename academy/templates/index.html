@@ -1,0 +1,182 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+<!-- PAGE WRAPPER -->
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 transition">
+
+    <!-- ❗ MOBILE BOTTOM NAV -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow md:hidden flex justify-around py-3">
+        <button class="text-gray-700 dark:text-gray-200">🏠</button>
+        <button class="text-gray-700 dark:text-gray-200">📘</button>
+        <button class="text-gray-700 dark:text-gray-200">📖</button>
+        <button class="text-gray-700 dark:text-gray-200">🎤</button>
+    </nav>
+
+    <div class="flex">
+
+        <!-- SIDEBAR -->
+        <aside class="w-64 bg-white dark:bg-gray-800 shadow-lg p-6 hidden md:block">
+            <h1 class="text-2xl font-bold dark:text-white mb-8">📚 Study App</h1>
+
+            <!-- Dark Mode Switch -->
+            <button onclick="toggleTheme()" 
+                class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg w-full text-left">
+                🌗 Toggle Dark Mode
+            </button>
+
+            <!-- MENU -->
+            <nav class="mt-6 space-y-4">
+                <details class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                    <summary class="cursor-pointer dark:text-white font-medium">Menu</summary>
+                    <ul class="mt-2 space-y-2 text-gray-700 dark:text-gray-300">
+                        <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="/">Dashboard</a>
+                        <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'allVocabularyView' %}">Vocabulary</a>
+                        <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'allGrammarView' %}">Grammar</a>
+                        <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'sentencesView' %}">Sentences</a>
+                        <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'readingView' %}">Reading</a>
+                        <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'speakingContentView' %}">Speaking</a>
+                        <a href="{% url 'add_all' %}" class="block p-3 rounded-lg hover:bg-blue-100 font-medium">Create Own Task </a>
+                        <li class="block p-3 rounded-lg hover:bg-blue-100 font-medium">Create a Note</li>
+                    </ul>
+                </details>
+            </nav>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 p-6 space-y-10">
+
+            <!-- Header -->
+            <header class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold dark:text-white">Welcome Back</h2>
+                    <p class="text-gray-600 dark:text-gray-300">Ready to study?</p>
+                </div>
+
+                <!-- Streak Counter -->
+                <div class="px-4 py-2 bg-orange-100 dark:bg-orange-700 rounded-lg shadow font-semibold">
+                    🔥 Streak: <span class="font-bold">{{currentStrick}} Days</span>
+                </div>
+            </header>
+
+
+            <!-- Progress Bar -->
+            <section class="p-5 bg-white dark:bg-gray-800 rounded-xl shadow">
+                <h3 class="text-xl font-semibold dark:text-white mb-3">Today’s Progress</h3>
+
+                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3">
+                    <div class="bg-blue-600 h-3 rounded-full" style="width: 45%"></div>
+                </div>
+
+                <p class="mt-2 text-gray-600 dark:text-gray-300">45% completed</p>
+            </section>
+
+
+            <!-- SEARCH BAR -->
+            <div class="max-w-md">
+                <input type="text" placeholder="Search word..." 
+                       class="w-full p-3 rounded-xl shadow dark:bg-gray-700 dark:text-white"
+                       id="searchInput" onkeyup="filterCards()">
+            </div>
+
+
+
+            <section class="w-full grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+
+                <!-- Card Component -->
+                <div data-card class="animate-pop p-5 rounded-xl bg-white dark:bg-gray-800 dark:text-white shadow hover:shadow-lg transition">
+                    <h2 class="text-xl font-semibold text-center mb-3">Today’s Task</h2>
+                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
+                        <li>New Words — {{tVocab}}</li>
+                        <li>Sentences — {{tsen}}</li>
+                        <li>Grammar — {{tgra}}</li>
+                    </ul>
+                </div>
+
+                <div data-card class="animate-pop p-5 rounded-xl bg-white dark:bg-gray-800 dark:text-white shadow hover:shadow-lg transition">
+                    <h2 class="text-xl font-semibold text-center mb-3">Yesterday</h2>
+                    <ul class="space-y-1 text-gray-700 dark:text-gray-300 mb-4">
+                        <li>New Words — {{yVocab}}</li>
+                        <li>Sentences — {{ysen}}</li>
+                        <li>Grammar — {{ygra}}</li>
+                    </ul>
+                    <a href="{% url 'yesterdayTask' %}" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Revise</a>
+                </div>
+
+                <div data-card class="animate-pop p-5 rounded-xl bg-white dark:bg-gray-800 dark:text-white shadow hover:shadow-lg transition">
+                    <h2 class="text-xl font-semibold text-center mb-3">4 Days Ago</h2>
+                    <ul class="space-y-1 text-gray-700 dark:text-gray-300 mb-4">
+                        <li>New Words — {{fVocab}}</li>
+                        <li>Sentences — {{fsen}}</li>
+                        <li>Grammar — {{fgra}}</li> 
+                    </ul>
+                    <a href="{% url 'fourDayBeforeTask' %}" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Revise</a>
+
+                </div>
+
+                <div data-card class="animate-pop p-5 rounded-xl bg-white dark:bg-gray-800 dark:text-white shadow hover:shadow-lg transition">
+                    <h2 class="text-xl font-semibold text-center mb-3">7 Days Ago</h2>
+                    <ul class="space-y-1 text-gray-700 dark:text-gray-300 mb-4">
+                        <li>New Words — {{sVocab}}</li>
+                        <li>Sentences — {{ssen}}</li>
+                        <li>Grammar — {{sgra}}</li>
+                    </ul>
+                    <a href="{% url 'sevenDayBeforeTask' %}" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Revise</a>
+
+                </div>
+            </section>
+
+
+            <!-- Challenge Section -->
+            <section class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold text-center dark:text-white mb-6">Today's Challenge</h2>
+
+                <div class="space-y-3 dark:text-gray-300">
+                    <h3>Step 1: Review yesterday</h3>
+                    <h3>Step 2: Learn new words</h3>
+                    <h3>Step 3: Grammar</h3>
+                    <h3>Step 4: Reading</h3>
+                    <h3>Step 5: Speaking</h3>
+                    <h3>Step 6: Review everything</h3>
+                </div>
+
+                <div class="text-center mt-6">
+                    <a href="{% url 'todaystask' %}" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        Start
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- POP ANIMATION -->
+<style>
+    .animate-pop {
+        animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+        0% { transform: scale(0.8); opacity: 0 }
+        100% { transform: scale(1); opacity: 1 }
+    }
+</style>
+
+<!-- SEARCH FILTER SCRIPT -->
+<script>
+    function filterCards() {
+        const search = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('[data-card]').forEach(card => {
+            card.style.display = card.innerText.toLowerCase().includes(search) ? 'block' : 'none';
+        });
+    }
+</script>
+
+    
+{% endblock content %}

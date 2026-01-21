@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gray-100 flex">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white shadow-lg p-6 hidden md:block">
+        <h1 class="text-2xl font-bold mb-8">📘 Study Dashboard</h1>
+
+        <nav class="space-y-4">
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="/">Dashboard</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'allVocabularyView' %}">Vocabulary</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'allGrammarView' %}">Grammar</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'sentencesView' %}">Sentences</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'readingView' %}">Reading</a>
+            <a class="block p-3 rounded-lg hover:bg-blue-100 font-medium" href="{% url 'speakingContentView' %}">Speaking</a>
+        </nav>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-6 space-y-10">
+
+        <!-- HEADER -->
+        <header>
+            <h2 class="text-3xl font-bold">👋 Welcome Back</h2>
+            <p class="text-gray-600">Let’s continue revise all the Vocabulary what you learn.</p>
+        </header>
+
+
+
+                <!-- VOCAB CARDS -->
+                <section id="Vocabulary">
+                    <h3 class="text-2xl font-bold mb-4">📝 All {{ wordsCount }} Vocabulary Which You Alredy Learn.</h3>
+        
+                    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <!-- CARD -->
+                        {% for v in words %}
+                            <div class="bg-white p-5 rounded-xl shadow hover:shadow-md transition">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="text-blue-600 text-2xl">📌</div>
+                                    <h4 class="text-xl font-semibold">{{ v.chinese}}</h4>
+                                    <p class="text-gray-600">{{ v.pinyin }}</p>
+                                </div>
+                                <p class="font-medium text-gray-800 mt-1">→ {{ v.english }}</p>
+                            </div>
+                        {% endfor %}
+        
+                    </div>
+                </section>
+
+
+    </main>
+</div>
+
+
+{% endblock content %}
