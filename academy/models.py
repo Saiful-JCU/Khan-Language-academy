@@ -58,7 +58,7 @@ class Vocabulary(models.Model):
 class PracticeSentences(models.Model):
     day = models.ForeignKey(DayStrick, on_delete = models.CASCADE)
     word = models.ForeignKey(Vocabulary, on_delete=models.CASCADE)
-    sentence = models.CharField(max_length=300)
+    sentence = models.CharField(max_length=300, unique=True)
     pinyin = models.CharField(max_length = 500, null=True, blank=True)
     meaning = models.CharField(max_length = 500, null=True,blank=True)
 
@@ -103,3 +103,6 @@ class SpeakingPractice(models.Model):
 class Notes(models.Model):
     title = models.CharField(max_length = 300)
     content = RichTextField()
+
+
+

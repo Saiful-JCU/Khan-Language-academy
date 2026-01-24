@@ -145,13 +145,13 @@ def todaysTask(request):
     speak = SpeakingPractice.objects.filter(
         day__created_at = today
     )
-    return render(request, 'todaysTask.html', {'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
+    return render(request, 'todaysTask.html', { 'today': today, 'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
 
 def yesterdayTask(request):
 
     today = date.today()
     yesterday = today - timedelta(days=1)
-    print(yesterday)
+    # print(yesterday)
 
     vocab = Vocabulary.objects.filter(
         day__created_at = yesterday
@@ -177,7 +177,7 @@ def yesterdayTask(request):
     speak = SpeakingPractice.objects.filter(
         day__created_at = yesterday
     )
-    return render(request, 'yesterdaysTask.html', {'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
+    return render(request, 'yesterdaysTask.html', {'yesterday': yesterday,  'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
 
 def fourDayBeforeTask(request):
 
@@ -207,7 +207,7 @@ def fourDayBeforeTask(request):
     speak = SpeakingPractice.objects.filter(
         day__created_at = fourDay
     )
-    return render(request, 'fourDayBeforeTask.html', {'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
+    return render(request, 'fourDayBeforeTask.html', { 'fourDay': fourDay, 'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
 
 def sevenDayBeforeTask(request):
 
@@ -237,7 +237,7 @@ def sevenDayBeforeTask(request):
     speak = SpeakingPractice.objects.filter(
         day__created_at = sevenDay
     )
-    return render(request, 'sevenDayBeforeTask.html', {'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
+    return render(request, 'sevenDayBeforeTask.html', { 'sevenDay' : sevenDay , 'vocab':vocab, 'grammar':grammar, 'grammarRule':grammarRule, 'sentence': sentence, 'reading': reading, 'speak':speak})
 
 def add_all_data(request):
     print("inside all_data pull fun")
