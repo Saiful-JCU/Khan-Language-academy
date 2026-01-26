@@ -10,6 +10,7 @@ class DayStrickAdmin(admin.ModelAdmin):
 @admin.register(Vocabulary)
 class VocabularyAdmin(admin.ModelAdmin):
     list_display = ('day', 'chinese', 'pinyin', 'english', 'example')
+    search_fields = ('chinese', 'pinyin', 'english')
 
 
 @admin.register(Grammar)
